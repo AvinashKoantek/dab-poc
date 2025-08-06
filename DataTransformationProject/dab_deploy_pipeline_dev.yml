@@ -1,0 +1,29 @@
+name: Deploy Databricks Bundle to dtp-workspace-dev
+
+on:
+  push:
+    branches:
+      - dev
+
+env:
+  DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST_DEV }}
+  DATABRICKS_CLIENT_ID: ${{ secrets.DATABRICKS_CLIENT_ID_DEV }}
+  DATABRICKS_CLIENT_SECRET: ${{ secrets.DATABRICKS_CLIENT_SECRET_DEV }}
+
+jobs:
+  deploy_databricks_resources:
+    name: Deploy Databricks Resources
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Install Databricks CLI (DAB)
+        run: |
+          curl -fsSL https://raw.githubusercontent.com/databricks/setup-cli/main/install.sh | sh
+          databricks -v
+
+      - name: Deploy Bundle to dev_workspace
+        run: |
+          databricks bundle deploy -t dev

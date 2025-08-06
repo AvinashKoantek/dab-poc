@@ -1,0 +1,40 @@
+# This is a Databricks asset bundle definition for DataTransformationProject.
+# See https://docs.databricks.com/dev-tools/bundles/index.html for documentation.
+bundle:
+  name: DataTransformationProject
+
+include:
+  - resources/*.yml
+
+variables:
+  catalog:
+    description: Catalog name which used as the main/default catalog for the data in this project
+    default: main
+  schema:
+    description: Schema name which used as the main/default schema for the data in this project
+    default: databricks_poc
+  # add variables as needed similar to the above format.
+
+targets:
+  dev:
+    # The default target uses 'mode: development' to create a development copy.
+    # - Deployed resources get prefixed with '[dev my_user_name]'
+    # - Any job schedules and triggers are paused by default.
+    # See also https://docs.databricks.com/dev-tools/bundles/deployment-modes.html.
+    presets:
+      trigger_pause_status: PAUSED
+    #mode: development
+    default: true
+    workspace:
+      host: https://dbc-165ca508-5509.cloud.databricks.com
+      root_path: /Workspace/DAB_Deploy_DE_Repo_Files #/.bundle/${bundle.name}/${bundle.target}
+    run_as:
+      # This runs as terraform-user in dev. We could also use a service principal here,
+      # see https://docs.databricks.com/dev-tools/bundles/permissions.html.
+      service_principal_name: d2516c91-fe77-4fe5-8f47-855e49aaa3f1
+    variables:
+      catalog: dtp-catalog-dev
+      schema: bronze
+
+
+  #Other target will be added once QA and PROD env is setupped.
