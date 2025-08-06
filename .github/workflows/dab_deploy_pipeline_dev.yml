@@ -24,6 +24,8 @@ jobs:
           curl -fsSL https://raw.githubusercontent.com/databricks/setup-cli/main/install.sh | sh
           databricks -v
 
-      - name: Deploy Bundle to dev_workspace
+      - name: Deploy Bundle to dtp-workspace-dev
         run: |
-          databricks bundle deploy -t dev
+          databricks bundle deploy --bundle-root DataTransformationProject -t dev
+
+          #databricks bundle deploy -t dev
