@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - main
+    paths:
+      - "**/*.yml"
+      - "**/*.py"
 
 env:
   DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST_DEV }}
