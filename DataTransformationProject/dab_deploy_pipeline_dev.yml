@@ -3,7 +3,7 @@ name: Deploy Databricks Bundle to dtp-workspace-dev
 on:
   push:
     branches:
-      - dev
+      - main
 
 env:
   DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST_DEV }}
