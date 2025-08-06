@@ -26,6 +26,6 @@ jobs:
 
       - name: Deploy Bundle to dtp-workspace-dev
         run: |
-          databricks bundle deploy --bundle-root DataTransformationProject -t dev
-
-          #databricks bundle deploy -t dev
+          #databricks bundle deploy --bundle-root DataTransformationProject -t dev
+          cd DataTransformationProject
+          databricks bundle deploy -t dev
